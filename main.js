@@ -61,29 +61,48 @@ select.addEventListener(`change`, (e) => {
     });
 });
 
-// THeme section
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-const themeToggleBtn = document.getElementById("theme-toggle");
-
-const currentTheme = localStorage.getItem("theme");
-if (currentTheme === "dark") {
-  document.body.classList.add("dark-mode");
-} else if (currentTheme === "light") {
-  document.body.classList.add("light-mode");
-} else if (prefersDarkScheme.matches) {
-  document.body.classList.add("dark-mode");
-} else {
-  document.body.classList.add("light-mode");
+// Function to apply the theme
+function applyTheme(theme) {
+  document.body.classList.remove("dark-mode", "light-mode");
+  document.body.classList.add(theme);
+  localStorage.setItem("theme", theme);
 }
 
-themeToggleBtn.addEventListener("click", function () {
-  if (document.body.classList.contains("dark-mode")) {
-    document.body.classList.remove("dark-mode");
-    document.body.classList.add("light-mode");
-    localStorage.setItem("theme", "light");
-  } else {
-    document.body.classList.remove("light-mode");
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("theme", "dark");
+// Check local storage for theme and apply it
+const currentTheme = localStorage.getItem("theme");
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+if (currentTheme === "dark") {
+  applyTheme("dark-mode");
+} else if (currentTheme === "light") {
+  applyTheme("light-mode");
+} else if (prefersDarkScheme.matches) {
+  applyTheme("dark-mode");
+} else {
+  applyTheme("light-mode");
+}
+
+// Toggle theme when the button is clicked
+const themeToggleBtn = document.getElementById("theme-toggle"); // Ensure you have an element with this ID
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", function () {
+    if (document.body.classList.contains("dark-mode")) {
+      applyTheme("light-mode");
+    } else {
+      applyTheme("dark-mode");
+    }
+  });
+}
+
+// Update theme based on user preference change
+prefersDarkScheme.addEventListener("change", (e) => {
+  // Apply theme based on system preference only if no theme is set in localStorage
+  if (!localStorage.getItem("theme")) {
+    if (e.matches) {
+      applyTheme("dark-mode");
+    } else {
+      applyTheme("light-mode");
+    }
   }
 });
