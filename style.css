@@ -1,4 +1,3 @@
-/* Apply Google Font to body */
 body {
   font-family: "Cairo", sans-serif !important;
 }
@@ -10,11 +9,11 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Masonry layout */
 .masonry {
   column-count: 4;
   column-gap: 2rem;
 }
+
 .masonry .card {
   break-inside: avoid;
   margin-bottom: 1rem;
@@ -39,42 +38,106 @@ body {
   }
 }
 
-/* Customize scrollbar width and color */
 ::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  width: 8px;
 }
 
-/* Scrollbar track */
 ::-webkit-scrollbar-track {
-  background: transparent; /* Color of the track */
+  background: transparent;
 }
 
-/* Scrollbar thumb */
 ::-webkit-scrollbar-thumb {
-  background-color: #888; /* Color of the scrollbar handle */
-  border-radius: 1rem; /* Rounded corners for the thumb */
+  background-color: #888;
+  border-radius: 1rem;
 }
 
-/* Hover effect on the scrollbar thumb */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #444; /* Darken the thumb when hovered */
+  background-color: #444;
 }
 
 @media (prefers-color-scheme: dark) {
-  body,
-  p,
-  small,
-  option {
+  body.dark-mode,
+  .dark-mode p,
+  .dark-mode small,
+  .dark-mode option {
     color: #ddd !important;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #ddd; /* Darken the thumb when hovered */
+    background-color: #ddd;
   }
 
-  body,
-  .masonry .card,
-  #select {
+  body.dark-mode,
+  body.dark-mode .masonry .card,
+  body.dark-mode #select {
     background-color: #111;
   }
+}
+
+@media (prefers-color-scheme: light) {
+  body.light-mode,
+  .light-mode p,
+  .light-mode small,
+  .light-mode option {
+    color: #333 !important;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #ccc;
+  }
+
+  body.light-mode,
+  .light-mode .toggle-btn,
+  .light-mode .masonry .card,
+  body.dark-mode #select {
+    background-color: #fff;
+  }
+}
+
+.toggle-btn {
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.light-icon {
+  opacity: 1;
+}
+
+.dark-icon {
+  opacity: 0;
+  transform: translateX(24px);
+}
+
+body.dark-mode .dark-icon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+body.dark-mode .light-icon {
+  opacity: 0;
+  transform: translateX(-24px);
 }

@@ -20,12 +20,58 @@
     />
   </head>
   <body class="p-6">
+    <button id="theme-toggle" class="toggle-btn">
+      <span class="icon-wrapper">
+        <!-- Sun SVG for light mode -->
+        <svg
+          class="icon light-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 2v2m0 16v2m10-10h-2M4 12H2m16.364-7.364l-1.414 1.414M6.05 17.95l-1.414-1.414M17.95 17.95l1.414-1.414M6.05 6.05L4.636 7.464"
+          />
+          <circle
+            cx="12"
+            cy="12"
+            r="5"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+        </svg>
+        <!-- Moon SVG for dark mode -->
+        <svg
+          class="icon dark-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+          />
+        </svg>
+      </span>
+    </button>
+
     <div class="container mx-auto">
       <h1 class="text-4xl font-bold text-center mb-8">الأذكار</h1>
       <select
         name=""
         id="select"
-        class="rounded my-4 focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500"
+        class="rounded my-4 focus:outline-none bg-white"
       >
         <option value="">--اختر--</option>
       </select>
