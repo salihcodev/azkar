@@ -1,37 +1,38 @@
-      /* Apply Google Font to body */
-      body {
-        font-family: "Cairo", sans-serif;
-      }
-      #select { 
-        border: 1px solid gray;
-        padding: 5px;
-      }
+/* Apply Google Font to body */
+body {
+  font-family: "Cairo", sans-serif !important;
+}
 
-      /* Masonry layout */
-      .masonry {
-        column-count: 4;
-        column-gap: 2rem;
-      }
-      .masonry .card {
-        break-inside: avoid;
-        margin-bottom: 1rem;
-        border-radius: 1.2rem;
-      }
+#select {
+  border: 1px solid gray;
+  padding: 5px;
+}
 
-      @media (max-width: 769px) {
-        .masonry {
-          column-count: 1;
-        }
-      }
+/* Masonry layout */
+.masonry {
+  column-count: 4;
+  column-gap: 2rem;
+}
+.masonry .card {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  border-radius: 1.2rem;
+}
 
-      @media (min-width: 770px) {
-        .masonry {
-          column-count: 2;
-        }
-      }
+@media (max-width: 769px) {
+  .masonry {
+    column-count: 1;
+  }
+}
 
-      @media (min-width: 960px) {
-        .masonry {
-          column-count: 4;
-        }
-      }
+@media (min-width: 770px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 960px) {
+  .masonry {
+    column-count: 4;
+  }
+}
