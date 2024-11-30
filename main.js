@@ -1,18 +1,18 @@
-// load data
+// Load data
 const azkarData = async () => {
-  const res = await fetch("/azkar.json");
+  const res = await fetch("./azkar.json");
   const data = await res.json();
   return data;
 };
 const catsData = async () => {
-  const res = await fetch("/categories.json");
+  const res = await fetch("./categories.json");
   const data = await res.json();
   return await data;
 };
 const azkar = await azkarData();
 const cats = await catsData();
 
-// the select
+// The select
 const select = document.getElementById("select");
 
 cats.forEach(({ cat_name }) => {
@@ -55,20 +55,27 @@ select.addEventListener(`change`, (e) => {
 
       zekrCount.innerText = `[${zekrItem.count ? zekrItem.count : 1}]`;
 
+      zekrText.addEventListener("click", () => {
+        speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(zekrItem.zekr);
+        utterance.lang = "ar-SA";
+
+        speechSynthesis.speak(utterance);
+      });
+
       card.appendChild(zekrText);
       card.appendChild(zekrCount);
       container.appendChild(card);
     });
 });
 
-// Function to apply the theme
 function applyTheme(theme) {
   document.body.classList.remove("dark-mode", "light-mode");
   document.body.classList.add(theme);
   localStorage.setItem("theme", theme);
 }
 
-// Check local storage for theme and apply it
 const currentTheme = localStorage.getItem("theme");
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -82,8 +89,7 @@ if (currentTheme === "dark") {
   applyTheme("light-mode");
 }
 
-// Toggle theme when the button is clicked
-const themeToggleBtn = document.getElementById("theme-toggle"); // Ensure you have an element with this ID
+const themeToggleBtn = document.getElementById("theme-toggle");
 
 if (themeToggleBtn) {
   themeToggleBtn.addEventListener("click", function () {
@@ -95,9 +101,7 @@ if (themeToggleBtn) {
   });
 }
 
-// Update theme based on user preference change
 prefersDarkScheme.addEventListener("change", (e) => {
-  // Apply theme based on system preference only if no theme is set in localStorage
   if (!localStorage.getItem("theme")) {
     if (e.matches) {
       applyTheme("dark-mode");
