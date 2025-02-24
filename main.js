@@ -1,3 +1,30 @@
+let deferredPrompt;
+const installButton = document.getElementById("install-button");
+
+if (installButton) {
+ 
+  window.addEventListener("beforeinstallprompt", (event) => {
+    console.log("beforeinstallprompt event fired!"); 
+    event.preventDefault();
+    deferredPrompt = event;
+    installButton.style.display = "block";
+  });
+
+  installButton.addEventListener("click", async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User response to install prompt: ${outcome}`);
+      deferredPrompt = null;
+      installButton.style.display = "none";
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    installButton.style.display = "none";
+  });
+}
+
 // Load data
 const azkarData = async () => {
   const res = await fetch("./azkar.json");
